@@ -6,18 +6,18 @@
 #
 # To run the script directly
 #    npm install
-#    node_modules/coffee-script/bin/coffee examples/simple_reverse.coffee 
+#    node_modules/coffee-script/bin/coffee examples/simple_reverse.coffee
 #
 # If you want to look at / run / modify the compiled javascript
 #    npm install
-#    node_modules/coffee-script/bin/coffee -c examples/simple_reverse.coffee 
+#    node_modules/coffee-script/bin/coffee -c examples/simple_reverse.coffee
 #    cd examples
 #    node simple_reverse.js
 #
 
 Slack = require '..'
 
-token = 'xoxb-YOUR-TOKEN-HERE' # Add a bot at https://my.slack.com/services/new/bot and copy the token here.
+token = 'xoxb-16824500112-v8dCIwUzXSAcIKrl5fzioIfZ' # Add a bot at https://my.slack.com/services/new/bot and copy the token here.
 autoReconnect = true
 autoMark = true
 
@@ -29,9 +29,9 @@ slack.on 'open', ->
   unreads = slack.getUnreadCount()
 
   # Get all the channels that bot is a member of
-  channels = ("##{channel.name}" for id, channel of slack.channels when channel.is_member)
+  channels = ("##{bottest}" for id, channel of slack.channels when channel.is_member)
 
-  # Get all groups that are open and not archived 
+  # Get all groups that are open and not archived
   groups = (group.name for id, group of slack.groups when group.is_open and not group.is_archived)
 
   console.log "Welcome to Slack. You are @#{slack.self.name} of #{slack.team.name}"
@@ -67,7 +67,7 @@ slack.on 'message', (message) ->
       @#{slack.self.name} responded with "#{response}"
     """
   else
-    #this one should probably be impossible, since we're in slack.on 'message' 
+    #this one should probably be impossible, since we're in slack.on 'message'
     typeError = if type isnt 'message' then "unexpected type #{type}." else null
     #Can happen on delete/edit/a few other events
     textError = if not text? then 'text was undefined.' else null
